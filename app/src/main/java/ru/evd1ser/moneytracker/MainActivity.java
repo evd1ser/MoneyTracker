@@ -3,6 +3,7 @@ package ru.evd1ser.moneytracker;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,22 +23,44 @@ public class MainActivity extends AppCompatActivity
     /**
      * homework 2
      */
+    private Toolbar toolbar;
 
+    private void setupActionBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle toggle;
+
+    private void setupDrawerLayout() {
+        toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        assert drawerLayout != null;
+        drawerLayout.addDrawerListener(toggle);
+        //drawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+
+        navigationView.setNavigationItemSelectedListener(this);
+        setTitle(getString(R.string.app_name));
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        setupActionBar();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        setupDrawerLayout();
     }
 
     @Override
