@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">MoneyTracker</string>
     <string name="hello_world">Hello World!</string>
+    <string name="user_name">Евдокимов Сергей</string>
+    <string name="email">evd1ser@gmail.com</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_drawer_expenses">Траты</string>
+    <string name="nav_drawer_categories">Категории</string>
+    <string name="nav_drawer_statistics">Статистика</string>
+    <string name="nav_drawer_settings">Настройки</string>
 </resources>
