@@ -20,6 +20,8 @@ public class ExpensesAdapret extends RecyclerView.Adapter<ExpensesAdapret.Expens
         this.expensesList = expensesList;
     }
 
+
+
     @Override
     public ExpenseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
