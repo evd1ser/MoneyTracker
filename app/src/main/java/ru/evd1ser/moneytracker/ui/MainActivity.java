@@ -1,19 +1,23 @@
-package ru.evd1ser.moneytracker;
+package ru.evd1ser.moneytracker.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+
+import ru.evd1ser.moneytracker.R;
+import ru.evd1ser.moneytracker.ui.fragments.CategoriesFragment;
+import ru.evd1ser.moneytracker.ui.fragments.ExpensesFragment;
+import ru.evd1ser.moneytracker.ui.fragments.SettingsFragment;
+import ru.evd1ser.moneytracker.ui.fragments.StatisticsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,11 +60,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupActionBar();
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        setupActionBar();
         setupDrawerLayout();
+        if (savedInstanceState == null){
+            replaceFragment(new ExpensesFragment());
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.main_container, new ExpensesFragment(),
+//                            ExpensesFragment.class.getSimpleName())
+//                    .commit();
+        }
+
     }
 
     @Override
@@ -82,12 +94,35 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.drawer_expenses) {
-            // Handle the camera action
+            setTitle(R.string.nav_drawer_expenses);
+
+            navigationView.setCheckedItem(R.id.drawer_expenses);
+
+            replaceFragment(new ExpensesFragment());
+
         } else if (id == R.id.drawer_categories) {
+            setTitle(R.string.nav_drawer_categories);
+
+            navigationView.setCheckedItem(R.id.drawer_categories);
+
+            replaceFragment(new CategoriesFragment());
+
 
         } else if (id == R.id.drawer_statistics) {
 
+            setTitle(R.string.nav_drawer_statistics);
+
+            navigationView.setCheckedItem(R.id.drawer_statistics);
+
+            replaceFragment(new StatisticsFragment());
+
         } else if (id == R.id.drawer_settings) {
+
+            setTitle(R.string.nav_drawer_settings);
+
+            navigationView.setCheckedItem(R.id.drawer_settings);
+
+            replaceFragment(new SettingsFragment());
 
         } else if (id == R.id.nav_share) {
 
@@ -128,5 +163,17 @@ public class MainActivity extends AppCompatActivity
 //        super.onRestart();
 //        Log.d(LOG_TAG, "onRestart");
 //    }
+    private void replaceFragment(Fragment fragment) {
+        String backStackName = fragment.getClass().getName();
 
+        FragmentManager manager = getSupportFragmentManager();
+        boolean fragmentPopped = manager.popBackStackImmediate(backStackName, 0);
+
+        if (! fragmentPopped && manager.findFragmentByTag(backStackName) == null) {
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(R.id.main_container, fragment, backStackName);
+            ft.addToBackStack(backStackName);
+            ft.commit();
+        }
+    }
 }
