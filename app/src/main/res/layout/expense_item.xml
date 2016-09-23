@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/expense_card_root"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:id="@+id/expense_item_inner_layout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expense_item_expense_name"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/expense_item_expense_name"
+            android:id="@+id/expense_item_expense_prise"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="end"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
