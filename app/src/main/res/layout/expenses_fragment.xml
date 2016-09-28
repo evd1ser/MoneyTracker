@@ -17,6 +17,6 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_plus_white_18dp"
         android:layout_gravity="end|bottom"
-        app:layout_behavior=".utils.ScrollAwareFABBehavior"
+        app:layout_behavior="ru.evd1ser.moneytracker.utils.utils.ScrollAwareFABBehavior"
         android:layout_margin="@dimen/padding"/>
 </android.support.design.widget.CoordinatorLayout>
