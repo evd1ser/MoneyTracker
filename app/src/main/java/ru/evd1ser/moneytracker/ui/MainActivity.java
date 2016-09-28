@@ -1,7 +1,9 @@
 package ru.evd1ser.moneytracker.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import ru.evd1ser.moneytracker.R;
 import ru.evd1ser.moneytracker.ui.fragments.CategoriesFragment;
@@ -23,38 +26,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-
-    /**
-     * homework 2
-     */
-    private Toolbar toolbar;
-
-    private void setupActionBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
+    private Toolbar toolbar;
+    private FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-    private void setupDrawerLayout() {
-        toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        assert drawerLayout != null;
-        drawerLayout.addDrawerListener(toggle);
-        //drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-
-
-        navigationView.setNavigationItemSelectedListener(this);
-        setTitle(getString(R.string.app_name));
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +44,35 @@ public class MainActivity extends AppCompatActivity
         setupDrawerLayout();
         if (savedInstanceState == null){
             replaceFragment(new ExpensesFragment());
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.main_container, new ExpensesFragment(),
-//                            ExpensesFragment.class.getSimpleName())
-//                    .commit();
         }
 
     }
+
+    /*
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG, "onResume");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG, "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG, "onRestart");
+    }
+    */
 
     @Override
     public void onBackPressed() {
@@ -85,12 +84,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.drawer_expenses) {
@@ -133,34 +130,21 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+
     /**
-     * homework 1
+     * homework 2
      */
 
+    private void setupActionBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Log.d(LOG_TAG, "onStart");
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Log.d(LOG_TAG, "onResume");
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        Log.d(LOG_TAG, "onStop");
-//    }
-//
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        Log.d(LOG_TAG, "onRestart");
-//    }
     private void replaceFragment(Fragment fragment) {
         String backStackName = fragment.getClass().getName();
 
@@ -174,4 +158,18 @@ public class MainActivity extends AppCompatActivity
             ft.commit();
         }
     }
+
+    private void setupDrawerLayout() {
+        toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        assert drawerLayout != null;
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+        navigationView.setNavigationItemSelectedListener(this);
+        setTitle(getString(R.string.app_name));
+
+    }
+
 }
