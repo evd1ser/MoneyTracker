@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_expenses"
+            android:title="@string/nav_drawer_expenses"
+            android:icon="@drawable/cart_plus"
+            android:checked="true"/>
+        <item
+            android:id="@+id/drawer_categories"
+            android:icon="@drawable/folder_multiple_outline"
+            android:title="@string/nav_drawer_categories"/>
+        <item
+            android:id="@+id/drawer_statistics"
+            android:icon="@drawable/chart_line"
+            android:title="@string/nav_drawer_statistics"/>
+        <item
+            android:id="@+id/drawer_settings"
+            android:icon="@drawable/android"
+            android:title="@string/nav_drawer_settings"/>
+    </group>
+
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+
+</menu>
